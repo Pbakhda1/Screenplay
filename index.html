@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>ScreenPlay — Competitive ride games & rewards</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="container topbar-inner">
+      <div class="brand">
+        <div class="logo" aria-hidden="true">SP</div>
+        <div class="brand-text">
+          <div class="brand-name">ScreenPlay</div>
+          <div class="brand-tag">Turn ride time into a fun competitive game</div>
+        </div>
+      </div>
+
+      <nav class="nav">
+        <a href="#how">How it works</a>
+        <a href="#demo">Demo</a>
+        <a href="#drivers">Drivers</a>
+        <a href="#faq">FAQ</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="container hero-grid">
+        <div class="hero-copy">
+          <h1>Compete while you ride. Win rewards you can tip or save.</h1>
+          <p class="subhead">
+            ScreenPlay is a rectangular block installed in the back trunks of Uber/Lyft vehicles,
+            with a passenger-facing monitor. Riders opt in, choose a small bet, get matched with
+            another ScreenPlay-equipped vehicle on a similar route, and earn points by passing more
+            ScreenPlay cars.
+          </p>
+
+          <div class="cta-row">
+            <a class="btn primary" href="#demo">Try the demo</a>
+            <a class="btn ghost" href="#how">See how it works</a>
+          </div>
+
+          <div class="creator">
+            Created by <strong>Parth Pankaj Bakhda</strong>
+          </div>
+
+          <div class="trust">
+            <div class="pill">✅ Fast opt-in</div>
+            <div class="pill">✅ Skill + luck gameplay</div>
+            <div class="pill">✅ Rewards as tips/discounts</div>
+            <div class="pill">✅ Driver reviews built-in</div>
+          </div>
+        </div>
+
+        <div class="hero-card">
+          <div class="card-title">Core idea</div>
+          <ul class="checklist">
+            <li>Passenger chooses a bet amount ($2, $5, $10, or custom)</li>
+            <li>Match with another ScreenPlay ride on a similar route</li>
+            <li>Points increase as your ride passes ScreenPlay-equipped cars</li>
+            <li>Winner gets a cash reward to tip or apply as a ride discount</li>
+            <li>Quick driver review at the end</li>
+          </ul>
+          <div class="note">
+            <strong>Note:</strong> This demo shows the experience flow.
+            Real matching + payouts would be handled by a secure backend.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="how" class="section">
+      <div class="container">
+        <div class="section-head">
+          <h2>How ScreenPlay works</h2>
+          <p>Simple, fast, and fun from pickup to dropoff.</p>
+        </div>
+
+        <div class="steps">
+          <div class="step">
+            <div class="step-num">1</div>
+            <div class="step-body">
+              <h3>Opt in</h3>
+              <p>Passenger taps “Play” on the backseat monitor.</p>
+            </div>
+          </div>
+
+          <div class="step">
+            <div class="step-num">2</div>
+            <div class="step-body">
+              <h3>Choose your bet</h3>
+              <p>Select $2, $5, $10, or enter a custom amount.</p>
+            </div>
+          </div>
+
+          <div class="step">
+            <div class="step-num">3</div>
+            <div class="step-body">
+              <h3>Get matched</h3>
+              <p>System matches you with another ScreenPlay ride on a similar route/time window.</p>
+            </div>
+          </div>
+
+          <div class="step">
+            <div class="step-num">4</div>
+            <div class="step-body">
+              <h3>Earn points</h3>
+              <p>As your vehicle passes more ScreenPlay vehicles, your score climbs.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="steps steps-2">
+          <div class="step">
+            <div class="step-num">5</div>
+            <div class="step-body">
+              <h3>Win rewards</h3>
+              <p>Winner can apply reward as a tip or discount (example payouts: $4, $10, $20).</p>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-num">6</div>
+            <div class="step-body">
+              <h3>Review your driver</h3>
+              <p>One-tap feedback improves rider and driver experience.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="demo" class="section">
+      <div class="container">
+        <div class="section-head">
+          <h2>Interactive demo</h2>
+          <p>Try the passenger flow: bet → match → score → payout → driver review.</p>
+        </div>
+
+        <div class="workspace">
+          <div class="panel">
+            <div class="panel-title">1) Choose bet amount</div>
+
+            <div class="bet-row">
+              <button class="chip" data-bet="2">$2</button>
+              <button class="chip" data-bet="5">$5</button>
+              <button class="chip" data-bet="10">$10</button>
+
+              <div class="custom">
+                <label class="label">Custom</label>
+                <div class="custom-input">
+                  <span class="dollar">$</span>
+                  <input id="customBet" type="number" min="1" step="1" placeholder="Enter amount" />
+                </div>
+              </div>
+            </div>
+
+            <div class="divider"></div>
+
+            <div class="panel-title">2) Start matchmaking</div>
+            <div class="match-row">
+              <button id="matchBtn" class="btn primary" disabled>Find opponent</button>
+              <div class="tiny" id="matchStatus">Select a bet to enable matchmaking.</div>
+            </div>
+
+            <div class="match-card" id="matchCard">
+              <div class="match-title">Match found</div>
+              <div class="match-meta">
+                Opponent ride: <span id="opponentId" class="mono">—</span><br/>
+                Route similarity: <span id="routeSim">—</span><br/>
+                Estimated time remaining: <span id="eta">—</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="panel">
+            <div class="panel-title">3) Scoreboard</div>
+
+            <div class="scoreboard">
+              <div class="scorebox">
+                <div class="score-label">Your Score</div>
+                <div id="yourScore" class="score-value">0</div>
+                <div class="score-sub" id="yourPasses">0 ScreenPlay cars passed</div>
+              </div>
+
+              <div class="scorebox">
+                <div class="score-label">Opponent Score</div>
+                <div id="oppScore" class="score-value">0</div>
+                <div class="score-sub" id="oppPasses">0 ScreenPlay cars passed</div>
+              </div>
+            </div>
+
+            <div class="control-row">
+              <button id="simulateBtn" class="btn" disabled>Simulate passing cars</button>
+              <button id="finishBtn" class="btn primary" disabled>Finish ride</button>
+            </div>
+
+            <div class="fineprint">
+              Demo mode: In real life, scores would be updated from GPS + ScreenPlay device telemetry.
+            </div>
+          </div>
+        </div>
+
+        <div class="results">
+          <div class="results-head">
+            <h3>Outcome & reward</h3>
+            <div class="filters">
+              <label class="select">
+                Reward use:
+                <select id="rewardUse" disabled>
+                  <option value="tip">Use as tip</option>
+                  <option value="discount">Use as ride discount</option>
+                </select>
+              </label>
+            </div>
+          </div>
+
+          <div class="outcome-grid">
+            <div class="outcome-card">
+              <div class="outcome-title">Winner</div>
+              <div id="winnerText" class="outcome-value muted">Finish the ride to see results.</div>
+            </div>
+
+            <div class="outcome-card">
+              <div class="outcome-title">Reward</div>
+              <div id="rewardText" class="outcome-value muted">—</div>
+              <div id="rewardNote" class="outcome-sub muted">—</div>
+            </div>
+
+            <div class="outcome-card">
+              <div class="outcome-title">Driver quick review</div>
+              <div class="review-row" id="reviewRow">
+                <button class="star" data-stars="1" disabled>★</button>
+                <button class="star" data-stars="2" disabled>★</button>
+                <button class="star" data-stars="3" disabled>★</button>
+                <button class="star" data-stars="4" disabled>★</button>
+                <button class="star" data-stars="5" disabled>★</button>
+              </div>
+              <div class="tiny" id="reviewStatus">Finish the ride to unlock review.</div>
+            </div>
+          </div>
+
+          <div class="callout" id="securityCallout">
+            <strong>Security note:</strong> Real payouts require identity checks, anti-fraud rules,
+            and licensed payment processing. This site demonstrates the product experience only.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="drivers" class="section section-alt">
+      <div class="container">
+        <div class="section-head">
+          <h2>Value for drivers</h2>
+          <p>Better engagement, better tips, better experience.</p>
+        </div>
+
+        <div class="api-cards">
+          <div class="api-card">
+            <h3>More tips</h3>
+            <p>Rewards can be applied as tips, increasing driver earnings naturally.</p>
+            <ul>
+              <li>Tip boost option</li>
+              <li>Optional rider incentives</li>
+              <li>Positive experience loop</li>
+            </ul>
+          </div>
+
+          <div class="api-card">
+            <h3>Instant reviews</h3>
+            <p>One-tap feedback improves driver ratings and rider trust.</p>
+            <ul>
+              <li>Fast review flow</li>
+              <li>Less friction than phone apps</li>
+              <li>Better service signals</li>
+            </ul>
+          </div>
+
+          <div class="api-card">
+            <h3>Optional partnerships</h3>
+            <p>Discount rewards can be sponsored or shared with partner brands.</p>
+            <ul>
+              <li>Sponsored rewards</li>
+              <li>Brand campaigns</li>
+              <li>Fleet rollouts</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="faq" class="section">
+      <div class="container">
+        <div class="section-head">
+          <h2>FAQ</h2>
+          <p>Common questions about gameplay, fairness, and payouts.</p>
+        </div>
+
+        <div class="faq">
+          <details>
+            <summary>How does matching work?</summary>
+            <p>
+              In production, the system matches rides by route similarity, time overlap, and availability
+              of ScreenPlay-equipped vehicles. The demo uses a simulated match.
+            </p>
+          </details>
+
+          <details>
+            <summary>How are points counted?</summary>
+            <p>
+              Points increase as your vehicle passes other ScreenPlay vehicles. Production could use
+              GPS proximity + device verification to prevent spoofing.
+            </p>
+          </details>
+
+          <details>
+            <summary>Is “betting” legal?</summary>
+            <p>
+              Any wager-like mechanic must be designed carefully around state laws, age requirements,
+              and licensing. Many apps use “sweepstakes”/rewards structures instead of gambling.
+            </p>
+          </details>
+
+          <details>
+            <summary>Can rewards be used as tips?</summary>
+            <p>
+              Yes — rewards can be redeemable as tips or as discounts for current/future rides depending on partnerships.
+            </p>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <div class="container footer-inner">
+        <div>
+          <div class="footer-brand">ScreenPlay</div>
+          <div class="footer-sub">Created by Parth Pankaj Bakhda</div>
+        </div>
+        <div class="footer-links">
+          <a href="#how">How it works</a>
+          <a href="#demo">Demo</a>
+          <a href="#drivers">Drivers</a>
+          <a href="#faq">FAQ</a>
+        </div>
+      </div>
+    </footer>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>
